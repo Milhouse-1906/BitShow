@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import BitShow.model.ntidade.Pergunta;
+import BitShow.service.PerguntaService;
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +24,7 @@ public class PerguntaController {
 
     @PostMapping("/perguntas")
     public ResponseEntity<Pergunta> criarPergunta(@RequestBody Pergunta pergunta) {
-        Pergunta novaPergunta = perguntaService.criarPergunta(pergunta);
+        Pergunta novaPergunta = ((PerguntaService) perguntaService).criarPergunta(pergunta);
         return new ResponseEntity<>(novaPergunta, HttpStatus.CREATED);
     }
 

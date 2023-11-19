@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import BitShow.model.ntidade.Usuario;
+import BitShow.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api")

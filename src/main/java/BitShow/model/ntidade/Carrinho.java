@@ -53,5 +53,13 @@ public class Carrinho {
 		this.usuario = usuario;
 	}
 
+	public static Carrinho getCarrinhoById(Long id2) {
+		return null;
+	}
+
+	public static Carrinho adicionarAoCarrinho(Carrinho carrinho) {
+		return null;
+	}
+
     
 }
