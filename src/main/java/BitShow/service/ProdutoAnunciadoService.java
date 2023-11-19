@@ -4,10 +4,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import BitShow.model.ntidade.Produto_Anunciado;
 import BitShow.model.repository.ProdutoAnunciadoRepository;
+import BitShow.model.specification.ProdutoAnunciadoSpecifications;
 
 @Service
 public class ProdutoAnunciadoService {
@@ -38,8 +40,22 @@ public class ProdutoAnunciadoService {
     public Produto_Anunciado getProdutoAnunciadoById(Long id) {
         return produtoAnunciadoRepository.findById(id).orElse(null);
     }
+    public List<Produto_Anunciado> buscarPorCategoria(Long idCategoria) {
+        Specification<Produto_Anunciado> spec = ProdutoAnunciadoSpecifications.porCategoria(idCategoria);
+        return produtoAnunciadoRepository.findAll(spec);
+    }
 
-    public List<Produto_Anunciado> getProdutosAnunciadosPorCategoria(Long idCategoria) {
-        return produtoAnunciadoRepository.findAllByCategoriaId(idCategoria);
+    public List<Produto_Anunciado> buscarPorUsuario(Long idUsuario) {
+        Specification<Produto_Anunciado> spec = ProdutoAnunciadoSpecifications.porUsuario(idUsuario);
+        return produtoAnunciadoRepository.findAll(spec);
+    }
+    public List<Produto_Anunciado> buscarProdutosValidos() {
+        Specification<Produto_Anunciado> spec = Specification.where(
+                ProdutoAnunciadoSpecifications.produtoNaoNulo()
+                        .and(ProdutoAnunciadoSpecifications.descricaoNaoVazia())
+                        .and(ProdutoAnunciadoSpecifications.dataAnuncioValida())
+        );
+
+        return produtoAnunciadoRepository.findAll(spec);
     }
 }
