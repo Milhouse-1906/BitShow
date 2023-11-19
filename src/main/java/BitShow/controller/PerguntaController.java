@@ -34,5 +34,5 @@ public class PerguntaController {
         return new ResponseEntity<>(pergunta, HttpStatus.OK);
     }
 
-    // Adicione outros métodos conforme necessário
+   
 }

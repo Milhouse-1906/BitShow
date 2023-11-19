@@ -57,7 +57,7 @@ public class Carrinho {
 		return null;
 	}
 
-	public static Carrinho adicionarAoCarrinho(Carrinho carrinho) {
+	public static Carrinho adicionarAoCarrinho(Carrinho carrinho2) {
 		return null;
 	}
 

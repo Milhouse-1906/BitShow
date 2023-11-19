@@ -34,5 +34,5 @@ public class UsuarioController {
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
-    // Adicione outros métodos conforme necessário
+
 }
