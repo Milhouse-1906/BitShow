@@ -1,4 +1,4 @@
-package BitShow_Model_Entidade;
+package BitShow.model.ntidade;
 
 import java.util.Date;
 

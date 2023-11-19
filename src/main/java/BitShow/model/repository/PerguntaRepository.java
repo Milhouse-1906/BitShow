@@ -1,5 +1,9 @@
 package BitShow.model.repository;
 
-public class PerguntaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
+import BitShow.model.ntidade.Pergunta;
+
+public interface PerguntaRepository extends JpaRepository<Pergunta, Long> {
+    // Adicione métodos de consulta personalizados, se necessário
 }

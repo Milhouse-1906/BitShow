@@ -1,4 +1,4 @@
-package BitShow_Model_Entidade;
+package BitShow.model.ntidade;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,24 +8,29 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Pergunta {
+public class Resposta {
 
-    public Pergunta(Long id, Usuario usuario, String texto) {
+    public Resposta(Long id, String texto, Usuario usuario, Pergunta pergunta) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
 		this.texto = texto;
+		this.usuario = usuario;
+		this.pergunta = pergunta;
 	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String texto;
+
     @ManyToOne
     @JoinColumn(name = "usuario")
     private Usuario usuario;
 
-    private String texto;
+    @ManyToOne
+    @JoinColumn(name = "pergunta")
+    private Pergunta pergunta;
 
 	public Long getId() {
 		return id;
@@ -33,14 +38,6 @@ public class Pergunta {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getTexto() {
@@ -51,5 +48,20 @@ public class Pergunta {
 		this.texto = texto;
 	}
 
-    
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Pergunta getPergunta() {
+		return pergunta;
+	}
+
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
+	}
+
 }
