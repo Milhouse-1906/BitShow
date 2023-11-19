@@ -12,6 +12,59 @@ public class ProdutoAnunciadoDTO {
     private Date dataVenda;
     private UsuarioDTO usuario;
     private CategoriaDTO categoria;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public String getPreco() {
+		return preco;
+	}
+	public void setPreco(String preco) {
+		this.preco = preco;
+	}
+	public Date getDataAnuncio() {
+		return dataAnuncio;
+	}
+	public void setDataAnuncio(Date dataAnuncio) {
+		this.dataAnuncio = dataAnuncio;
+	}
+	public Date getEncerramentoAnuncio() {
+		return encerramentoAnuncio;
+	}
+	public void setEncerramentoAnuncio(Date encerramentoAnuncio) {
+		this.encerramentoAnuncio = encerramentoAnuncio;
+	}
+	public Date getDataVenda() {
+		return dataVenda;
+	}
+	public void setDataVenda(Date dataVenda) {
+		this.dataVenda = dataVenda;
+	}
+	public UsuarioDTO getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
+	}
+	public CategoriaDTO getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(CategoriaDTO categoria) {
+		this.categoria = categoria;
+	}
 
-    // getters e setters
 }

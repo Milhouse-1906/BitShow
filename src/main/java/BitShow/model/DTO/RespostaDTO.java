@@ -30,5 +30,4 @@ public class RespostaDTO {
 		this.pergunta = pergunta;
 	}
 
-    // getters e setters
 }
