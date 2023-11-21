@@ -1,5 +1,7 @@
 package BitShow.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,30 @@ public class CarrinhoService {
         return carrinhoRepository.findById(id).orElse(null);
         
     }
+
+	public void removerDoCarrinho(Long id) {
+		Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
+
+        if (carrinhoOptional.isPresent()) {
+            Carrinho carrinho = carrinhoOptional.get();
+            carrinhoRepository.delete(carrinho);
+        } 
+//        else {
+//            throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
+//        }
+    }
+		
+
+	public Carrinho atualizarCarrinho(Long id, Carrinho carrinhoDTO) {
+	       Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
+
+	        //if (carrinhoOptional.isPresent()) {
+	            Carrinho carrinhoExistente = carrinhoOptional.get();
+	            return carrinhoRepository.save(carrinhoExistente);
+	       // }
+//	        else {
+//	            throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
+//	        }
+	}
     	
  }

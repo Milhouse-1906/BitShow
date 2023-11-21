@@ -2,11 +2,14 @@ package BitShow.service;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import BitShow.excepition.ProdutoAnunciadoNotFoundException;
+import BitShow.model.DTO.ProdutoAnunciadoDTO;
 import BitShow.model.ntidade.Produto_Anunciado;
 import BitShow.model.repository.ProdutoAnunciadoRepository;
 import BitShow.model.specification.ProdutoAnunciadoSpecifications;
@@ -57,5 +60,42 @@ public class ProdutoAnunciadoService {
         );
 
         return produtoAnunciadoRepository.findAll(spec);
+    }
+
+	public List<Produto_Anunciado> listarProdutos() {
+		return produtoAnunciadoRepository.findAll();
+	}
+
+	public Produto_Anunciado obterProdutoPorId(Long id) {
+		Optional<Produto_Anunciado> produtoOptional = produtoAnunciadoRepository.findById(id);
+	      return produtoOptional.orElseThrow();
+	    }
+
+	public void excluirProduto(Long id) throws ProdutoAnunciadoNotFoundException {
+		Optional<Produto_Anunciado> produtoOptional = produtoAnunciadoRepository.findById(id);
+
+        if (produtoOptional.isPresent()) {
+            Produto_Anunciado produtoAnunciado = produtoOptional.get();
+            produtoAnunciadoRepository.delete(produtoAnunciado);
+        } else {
+            throw new ProdutoAnunciadoNotFoundException("Produto não encontrado com o ID: " + id);
+        }
+    }
+		
+
+
+	public Produto_Anunciado atualizarProduto(Long id, ProdutoAnunciadoDTO produtoDTO) throws ProdutoAnunciadoNotFoundException {
+		Optional<Produto_Anunciado> produtoOptional = produtoAnunciadoRepository.findById(id);
+
+        if (produtoOptional.isPresent()) {
+            Produto_Anunciado produtoExistente = produtoOptional.get();
+            produtoExistente.setNome(produtoDTO.getNome());
+            produtoExistente.setDescricao(produtoDTO.getDescricao());
+            produtoExistente.setPreco(produtoDTO.getPreco());
+           return produtoAnunciadoRepository.save(produtoExistente);
+        
+        } else {
+            throw new ProdutoAnunciadoNotFoundException("Produto não encontrado com o ID: " + id);
+        }
     }
 }

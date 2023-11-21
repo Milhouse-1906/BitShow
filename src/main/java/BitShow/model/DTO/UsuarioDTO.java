@@ -7,6 +7,7 @@ public class UsuarioDTO {
     private String e_mail;
     private String telefone;
     private String endereco;
+    private String senha;
 	public Long getId() {
 		return id;
 	}
@@ -36,6 +37,12 @@ public class UsuarioDTO {
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public String setSenha(String senha) {
+		return senha;
 	}
 
 }

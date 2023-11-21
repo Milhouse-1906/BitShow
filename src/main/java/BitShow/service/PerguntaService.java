@@ -1,10 +1,12 @@
 package BitShow.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import BitShow.excepition.PerguntaNotFoundException;
+import BitShow.model.DTO.PerguntaDTO;
 import BitShow.model.ntidade.Pergunta;
 import BitShow.model.repository.PerguntaRepository;
 
@@ -29,7 +31,31 @@ public class PerguntaService {
         return perguntaRepository.findAllByUsuarioId(idUsuario);
     }
 
+	public void excluirPergunta(Long id) throws PerguntaNotFoundException {
+		Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
+
+        if (perguntaOptional.isPresent()) {
+            Pergunta pergunta = perguntaOptional.get();
+            
+            perguntaRepository.delete(pergunta);
+        } else {
+            throw new PerguntaNotFoundException("Pergunta não encontrada com o ID: " + id);
+        }
+    }
+
+	public Pergunta atualizarPergunta(Long id, PerguntaDTO perguntaDTO) throws PerguntaNotFoundException {
+		Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
+
+        if (perguntaOptional.isPresent()) {
+            Pergunta perguntaExistente = perguntaOptional.get();
+            perguntaExistente.setTexto(perguntaDTO.getTexto());
+            return perguntaRepository.save(perguntaExistente);
+        } else {
+            throw new PerguntaNotFoundException("Pergunta não encontrada com o ID: " + id);
+        }
+    }
 }
+
 
 
 
