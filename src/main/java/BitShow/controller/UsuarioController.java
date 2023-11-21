@@ -39,8 +39,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) throws UsuarioNotFoundException {
-        Usuario usuario = UsuarioService.atualizarUsuario(id, usuarioDTO);
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) throws UsuarioNotFoundException {
+        Usuario usuarioAtualizar = UsuarioService.atualizarUsuario(id, usuario);
         return ResponseEntity.ok(usuario);
     }
 

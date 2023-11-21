@@ -27,14 +27,13 @@ public class CategoriaService {
     
     }
 	
-    public Categoria atualizarCategoria(Long id, CategoriaDTO categoriaDTO) throws CategoriaNotFoundException {
+    public Categoria atualizarCategoria(Long id, Categoria categoria) throws CategoriaNotFoundException {
 		Optional<Categoria> categoriaOptional = categoriaRepository.findById(id);
 
         if (categoriaOptional.isPresent()) {
             Categoria categoriaExistente = categoriaOptional.get();
-            categoriaExistente.setNome(categoriaDTO.getNome());
-
-            // Salve as alterações no banco de dados
+            categoriaExistente.setNome(categoria.getNome());
+            
             return categoriaRepository.save(categoriaExistente);
         } else {
             throw new CategoriaNotFoundException("Categoria não encontrada com o ID: " + id);

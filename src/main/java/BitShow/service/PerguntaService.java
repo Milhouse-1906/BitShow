@@ -43,12 +43,12 @@ public class PerguntaService {
         }
     }
 
-	public Pergunta atualizarPergunta(Long id, PerguntaDTO perguntaDTO) throws PerguntaNotFoundException {
+	public Pergunta atualizarPergunta(Long id, Pergunta pergunta) throws PerguntaNotFoundException {
 		Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
 
         if (perguntaOptional.isPresent()) {
             Pergunta perguntaExistente = perguntaOptional.get();
-            perguntaExistente.setTexto(perguntaDTO.getTexto());
+            perguntaExistente.setTexto(pergunta.getTexto());
             return perguntaRepository.save(perguntaExistente);
         } else {
             throw new PerguntaNotFoundException("Pergunta não encontrada com o ID: " + id);

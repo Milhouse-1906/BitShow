@@ -37,8 +37,8 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoriaDTO) throws CategoriaNotFoundException {
-        Categoria categoria = categoriaService.atualizarCategoria(id, categoriaDTO);
+    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) throws CategoriaNotFoundException {
+        Categoria categoriaAtualizar = categoriaService.atualizarCategoria(id, categoria);
         return ResponseEntity.ok(categoria);
     }
 

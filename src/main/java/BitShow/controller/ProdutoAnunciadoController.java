@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import BitShow.excepition.ProdutoAnunciadoNotFoundException;
-import BitShow.model.DTO.ProdutoAnunciadoDTO;
 import BitShow.model.ntidade.Produto_Anunciado;
 import BitShow.service.ProdutoAnunciadoService;
 
@@ -47,8 +46,8 @@ public class ProdutoAnunciadoController {
     @PutMapping("/{id}")
     public ResponseEntity<Produto_Anunciado> atualizarProduto(
             @PathVariable Long id,
-            @RequestBody ProdutoAnunciadoDTO produtoDTO) throws ProdutoAnunciadoNotFoundException {
-        Produto_Anunciado produtoAtualizado = produtoAnunciadoService.atualizarProduto(id, produtoDTO);
+            @RequestBody Produto_Anunciado produto) throws ProdutoAnunciadoNotFoundException {
+        Produto_Anunciado produtoAtualizado = produtoAnunciadoService.atualizarProduto(id, produto);
         return ResponseEntity.ok(produtoAtualizado);
     }
 

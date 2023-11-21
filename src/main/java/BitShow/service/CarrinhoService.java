@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import BitShow.excepition.CarrinhoNotFoundException;
 import BitShow.model.ntidade.Carrinho;
 import BitShow.model.repository.CarrinhoRepository;
 
@@ -29,29 +30,28 @@ public class CarrinhoService {
         
     }
 
-	public void removerDoCarrinho(Long id) {
+	public void removerDoCarrinho(Long id) throws CarrinhoNotFoundException {
 		Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
 
         if (carrinhoOptional.isPresent()) {
             Carrinho carrinho = carrinhoOptional.get();
             carrinhoRepository.delete(carrinho);
         } 
-//        else {
-//            throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
-//        }
-    }
+        else {
+            throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);}
+ }
 		
 
-	public Carrinho atualizarCarrinho(Long id, Carrinho carrinhoDTO) {
+	public Carrinho atualizarCarrinho(Long id, Carrinho carrinhoDTO) throws CarrinhoNotFoundException {
 	       Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
 
-	        //if (carrinhoOptional.isPresent()) {
+	       if (carrinhoOptional.isPresent()) {
 	            Carrinho carrinhoExistente = carrinhoOptional.get();
 	            return carrinhoRepository.save(carrinhoExistente);
-	       // }
-//	        else {
-//	            throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
-//	        }
+	     }
+        else {
+          throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
+	        }
 	}
     	
  }

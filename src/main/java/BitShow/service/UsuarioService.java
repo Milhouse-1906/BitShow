@@ -46,17 +46,17 @@ public class UsuarioService {
 		
 	}
 
-	public static Usuario atualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws UsuarioNotFoundException {
+	public static Usuario atualizarUsuario(Long id, Usuario usuario) throws UsuarioNotFoundException {
 		Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuarioExistente = usuarioOptional.get();
 
-            usuarioExistente.setUsuario(usuarioDTO.getUsuario());
-            usuarioExistente.setE_mail(usuarioDTO.getE_mail());
-            usuarioExistente.setTelefone(usuarioDTO.getTelefone());
-            usuarioExistente.setSenha(usuarioDTO.getSenha());
-            usuarioExistente.setEndereco(usuarioDTO.getEndereco());
+            usuarioExistente.setUsuario(usuario.getUsuario());
+            usuarioExistente.setE_mail(usuario.getE_mail());
+            usuarioExistente.setTelefone(usuario.getTelefone());
+            usuarioExistente.setSenha(usuario.getSenha());
+            usuarioExistente.setEndereco(usuario.getEndereco());
             
             return usuarioRepository.save(usuarioExistente);
         } else {

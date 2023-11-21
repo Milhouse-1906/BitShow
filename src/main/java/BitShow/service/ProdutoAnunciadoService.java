@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import BitShow.excepition.ProdutoAnunciadoNotFoundException;
-import BitShow.model.DTO.ProdutoAnunciadoDTO;
 import BitShow.model.ntidade.Produto_Anunciado;
 import BitShow.model.repository.ProdutoAnunciadoRepository;
 import BitShow.model.specification.ProdutoAnunciadoSpecifications;
@@ -84,14 +83,14 @@ public class ProdutoAnunciadoService {
 		
 
 
-	public Produto_Anunciado atualizarProduto(Long id, ProdutoAnunciadoDTO produtoDTO) throws ProdutoAnunciadoNotFoundException {
+	public Produto_Anunciado atualizarProduto(Long id, Produto_Anunciado produto) throws ProdutoAnunciadoNotFoundException {
 		Optional<Produto_Anunciado> produtoOptional = produtoAnunciadoRepository.findById(id);
 
         if (produtoOptional.isPresent()) {
             Produto_Anunciado produtoExistente = produtoOptional.get();
-            produtoExistente.setNome(produtoDTO.getNome());
-            produtoExistente.setDescricao(produtoDTO.getDescricao());
-            produtoExistente.setPreco(produtoDTO.getPreco());
+            produtoExistente.setNome(produto.getNome());
+            produtoExistente.setDescricao(produto.getDescricao());
+            produtoExistente.setPreco(produto.getPreco());
            return produtoAnunciadoRepository.save(produtoExistente);
         
         } else {

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import BitShow.excepition.PerguntaNotFoundException;
-import BitShow.model.DTO.PerguntaDTO;
 import BitShow.model.ntidade.Pergunta;
 import BitShow.service.PerguntaService;
 
@@ -45,8 +44,8 @@ public class PerguntaController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Pergunta> atualizarPergunta(@PathVariable Long id, @RequestBody PerguntaDTO perguntaDTO) throws PerguntaNotFoundException {
-        Pergunta pergunta = perguntaService.atualizarPergunta(id, perguntaDTO);
+    public ResponseEntity<Pergunta> atualizarPergunta(@PathVariable Long id, @RequestBody Pergunta pergunta) throws PerguntaNotFoundException {
+        Pergunta perguntaAtualizar = perguntaService.atualizarPergunta(id, pergunta);
         return ResponseEntity.ok(pergunta);
     }
 }

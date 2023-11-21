@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import BitShow.excepition.CarrinhoNotFoundException;
 import BitShow.model.ntidade.Carrinho;
 import BitShow.service.CarrinhoService;
 
@@ -35,14 +36,14 @@ public class CarrinhoController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerDoCarrinho(@PathVariable Long id) {
+    public ResponseEntity<Void> removerDoCarrinho(@PathVariable Long id) throws CarrinhoNotFoundException {
         carrinhoService.removerDoCarrinho(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Carrinho> atualizarCarrinho(@PathVariable Long id, @RequestBody Carrinho carrinhoDTO) {
-        Carrinho carrinho = carrinhoService.atualizarCarrinho(id, carrinhoDTO);
+    public ResponseEntity<Carrinho> atualizarCarrinho(@PathVariable Long id, @RequestBody Carrinho carrinho) throws CarrinhoNotFoundException {
+        Carrinho carrinhoAtualizar = carrinhoService.atualizarCarrinho(id, carrinho);
         return ResponseEntity.ok(carrinho);
     }
 
