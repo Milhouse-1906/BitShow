@@ -7,18 +7,18 @@ import bitshow.model.entidade.Carrinho;
 import bitshow.service.CarrinhoService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/carrinho")
 public class CarrinhoController {
 
     @Autowired
     private CarrinhoService carrinhoService;
 
-    @PostMapping("/carrinho")
+    @PostMapping
     public Carrinho adicionarAoCarrinho(@RequestBody Carrinho carrinho) {
         return Carrinho.adicionarAoCarrinho(carrinho);
     }
 
-    @GetMapping("/carrinho/{id}")
+    @GetMapping("/{id}")
     public Carrinho getCarrinhoById(@PathVariable Long id) {
         return Carrinho.getCarrinhoById(id);
     }
