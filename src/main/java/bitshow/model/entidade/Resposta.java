@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 @Table(name = "RESPOSTA")
 public class Resposta {
 
-    public Resposta(Long id, String texto, Usuario usuario, Pergunta pergunta) {
+	public Resposta(Long id, String texto, Usuario usuario, Pergunta pergunta) {
 		super();
 		this.id = id;
 		this.texto = texto;
@@ -21,18 +21,22 @@ public class Resposta {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String texto;
+	private String texto;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario")
-    private Usuario usuario;
+	@ManyToOne
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "pergunta")
-    private Pergunta pergunta;
+	@ManyToOne
+	@JoinColumn(name = "pergunta")
+	private Pergunta pergunta;
+
+	public Resposta() {
+		super();
+	}
 
 	public Long getId() {
 		return id;

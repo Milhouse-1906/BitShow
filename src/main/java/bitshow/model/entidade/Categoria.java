@@ -10,17 +10,21 @@ import jakarta.persistence.Table;
 @Table(name = "CATEGORIA")
 public class Categoria {
 
-    public Categoria(Long id, String nome) {
+	public Categoria(Long id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String nome;
+	private String nome;
+
+	public Categoria() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -38,5 +42,4 @@ public class Categoria {
 		this.nome = nome;
 	}
 
-    
 }

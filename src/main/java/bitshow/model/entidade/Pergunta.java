@@ -12,7 +12,8 @@ import jakarta.persistence.Table;
 @Table(name = "PERGUNTA")
 public class Pergunta {
 
-    public Pergunta(Long id, Usuario usuario, String texto) {
+
+	public Pergunta(Long id, Usuario usuario, String texto) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -24,10 +25,14 @@ public class Pergunta {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     private String texto;
+    
+    public Pergunta() {
+		super();
+	}
 
 	public Long getId() {
 		return id;

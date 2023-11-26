@@ -1,24 +1,18 @@
 package bitshow.model.entidade;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "PRODUTO_ANUNCIADO")
 public class Produto_Anunciado {
 
-    public Produto_Anunciado(Long id, String nome, String descricao, String preco, Date dataAnuncio,
+	public Produto_Anunciado(Long id, String nome, String descricao, BigDecimal preco, Date dataAnuncio,
 			Date encerramentoAnuncio, Date dataVenda, Usuario usuario, Categoria categoria) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -31,29 +25,34 @@ public class Produto_Anunciado {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private BigDecimal preco;
+	private String nome;
+	private String descricao;
 
-    private String nome;
-    private String descricao;
-    private String preco;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date dataAnuncio;
 
-    @Temporal(TemporalType.DATE)
-    private Date dataAnuncio;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date encerramentoAnuncio;
 
-    @Temporal(TemporalType.DATE)
-    private Date encerramentoAnuncio;
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date dataVenda;
 
-    @Temporal(TemporalType.DATE)
-    private Date dataVenda;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "idusuario")
-    private Usuario usuario;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_categoria")
+	private Categoria categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria")
-    private Categoria categoria;
+	public Produto_Anunciado() {
+	}
 
 	public Long getId() {
 		return id;
@@ -79,11 +78,11 @@ public class Produto_Anunciado {
 		this.descricao = descricao;
 	}
 
-	public String getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(String preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
@@ -127,5 +126,4 @@ public class Produto_Anunciado {
 		this.categoria = categoria;
 	}
 
-    
 }

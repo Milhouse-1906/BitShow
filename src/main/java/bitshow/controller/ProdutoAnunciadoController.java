@@ -3,17 +3,7 @@ package bitshow.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import bitshow.exception.ProdutoAnunciadoNotFoundException;
 import bitshow.model.entidade.Produto_Anunciado;
 import bitshow.service.ProdutoAnunciadoService;
@@ -26,34 +16,29 @@ public class ProdutoAnunciadoController {
     private ProdutoAnunciadoService produtoAnunciadoService;
 
     @GetMapping
-    public ResponseEntity<List<Produto_Anunciado>> listarProdutos() {
-        List<Produto_Anunciado> produtos = produtoAnunciadoService.listarProdutos();
-        return ResponseEntity.ok(produtos);
+    public List<Produto_Anunciado> listarProdutos() {
+        return produtoAnunciadoService.listarProdutos();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto_Anunciado> obterProdutoPorId(@PathVariable Long id) {
-        Produto_Anunciado produto = produtoAnunciadoService.obterProdutoPorId(id);
-        return ResponseEntity.ok(produto);
+    public Produto_Anunciado obterProdutoPorId(@PathVariable Long id) {
+        return produtoAnunciadoService.obterProdutoPorId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Produto_Anunciado> criarProduto(@RequestBody Produto_Anunciado produtoAnunciado) {
-        Produto_Anunciado produtoCriado = produtoAnunciadoService.criarProdutoAnunciado(produtoAnunciado);
-        return new ResponseEntity<>(produtoCriado, HttpStatus.CREATED);
+    public Produto_Anunciado criarProduto(@RequestBody Produto_Anunciado produtoAnunciado) {
+        return produtoAnunciadoService.criarProdutoAnunciado(produtoAnunciado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto_Anunciado> atualizarProduto(
+    public Produto_Anunciado atualizarProduto(
             @PathVariable Long id,
             @RequestBody Produto_Anunciado produto) throws ProdutoAnunciadoNotFoundException {
-        Produto_Anunciado produtoAtualizado = produtoAnunciadoService.atualizarProduto(id, produto);
-        return ResponseEntity.ok(produtoAtualizado);
+        return produtoAnunciadoService.atualizarProduto(id, produto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirProduto(@PathVariable Long id) throws ProdutoAnunciadoNotFoundException {
+    public void excluirProduto(@PathVariable Long id) throws ProdutoAnunciadoNotFoundException {
         produtoAnunciadoService.excluirProduto(id);
-        return ResponseEntity.noContent().build();
     }
 }

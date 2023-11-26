@@ -1,21 +1,10 @@
 package bitshow.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import bitshow.exception.CarrinhoNotFoundException;
 import bitshow.model.entidade.Carrinho;
 import bitshow.service.CarrinhoService;
-
 
 @RestController
 @RequestMapping("/api")
@@ -25,29 +14,22 @@ public class CarrinhoController {
     private CarrinhoService carrinhoService;
 
     @PostMapping("/carrinho")
-    public ResponseEntity<Carrinho> adicionarAoCarrinho(@RequestBody Carrinho carrinho) {
-        Carrinho novoCarrinho = Carrinho.adicionarAoCarrinho(carrinho);
-        return new ResponseEntity<>(novoCarrinho, HttpStatus.CREATED);
+    public Carrinho adicionarAoCarrinho(@RequestBody Carrinho carrinho) {
+        return Carrinho.adicionarAoCarrinho(carrinho);
     }
 
     @GetMapping("/carrinho/{id}")
-    public ResponseEntity<Carrinho> getCarrinhoById(@PathVariable Long id) {
-        Carrinho carrinho = Carrinho.getCarrinhoById(id);
-        return new ResponseEntity<>(carrinho, HttpStatus.OK);
+    public Carrinho getCarrinhoById(@PathVariable Long id) {
+        return Carrinho.getCarrinhoById(id);
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerDoCarrinho(@PathVariable Long id) throws CarrinhoNotFoundException {
+    public void removerDoCarrinho(@PathVariable Long id) throws CarrinhoNotFoundException {
         carrinhoService.removerDoCarrinho(id);
-        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Carrinho> atualizarCarrinho(@PathVariable Long id, @RequestBody Carrinho carrinho) throws CarrinhoNotFoundException {
-        Carrinho carrinhoAtualizar = carrinhoService.atualizarCarrinho(id, carrinho);
-        return ResponseEntity.ok(carrinho);
+    public Carrinho atualizarCarrinho(@PathVariable Long id, @RequestBody Carrinho carrinho) throws CarrinhoNotFoundException {
+        return carrinhoService.atualizarCarrinho(id, carrinho);
     }
-
-    
-   }
-    
+}

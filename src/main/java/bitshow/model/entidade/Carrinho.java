@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 @Table(name = "CARRINHO")
 public class Carrinho {
 
-    public Carrinho(Long id, Produto_Anunciado produtoAnunciado, Usuario usuario) {
+	public Carrinho(Long id, Produto_Anunciado produtoAnunciado, Usuario usuario) {
 		super();
 		this.id = id;
 		this.produtoAnunciado = produtoAnunciado;
@@ -20,16 +20,20 @@ public class Carrinho {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "idproduto")
-    private Produto_Anunciado produtoAnunciado;
+	@ManyToOne
+	@JoinColumn(name = "idproduto")
+	private Produto_Anunciado produtoAnunciado;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario")
-    private Usuario usuario;
+	@ManyToOne
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
+
+	public Carrinho() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -63,5 +67,4 @@ public class Carrinho {
 		return null;
 	}
 
-    
 }
