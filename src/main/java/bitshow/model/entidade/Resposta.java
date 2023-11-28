@@ -27,11 +27,11 @@ public class Resposta {
 	private String texto;
 
 	@ManyToOne
-	@JoinColumn(name = "usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	@ManyToOne
-	@JoinColumn(name = "pergunta")
+	@JoinColumn(name = "id_pergunta")
 	private Pergunta pergunta;
 
 	public Resposta() {
