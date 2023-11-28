@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PRODUTO_ANUNCIADO")
+@Table(name = "produto_anunciado")
 public class Produto_Anunciado {
 
 	public Produto_Anunciado(Long id, String nome, String descricao, BigDecimal preco, Date dataAnuncio,

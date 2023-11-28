@@ -1,4 +1,7 @@
-dbbitshow;
+drop database if exists dbbitshow;
+create database dbbitshow;
+
+use dbbitshow;
 
 -- Criação da tabela categoria
 CREATE TABLE IF NOT EXISTS categoria (
