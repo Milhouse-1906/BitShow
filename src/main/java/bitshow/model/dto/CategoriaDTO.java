@@ -1,6 +1,7 @@
 package bitshow.model.dto;
 
 public class CategoriaDTO {
+	
 	private Long id;
     private String nome;
 	public Long getId() {
