@@ -8,6 +8,7 @@ import bitshow.service.CategoriaService;
 
 @RestController
 @RequestMapping("/api/categorias")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:5500"}, maxAge = 3600)
 public class CategoriaController {
 
     @Autowired

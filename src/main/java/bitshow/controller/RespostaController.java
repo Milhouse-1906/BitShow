@@ -30,8 +30,8 @@ public class RespostaController {
         return respostaService.getRespostaById(id);
     }
     
-    @GetMapping("/{id}")
-    public List <Resposta> getRespostasPorPergunta(@PathVariable Long idPergunta) {
-        return respostaService.getRespostasPorPergunta(idPergunta);
-    }
+//    @GetMapping("/{id}")
+//    public List <Resposta> getRespostasPorPergunta(@PathVariable Long idPergunta) {
+//        return respostaService.getRespostasPorPergunta(idPergunta);
+//    }
 }

@@ -8,6 +8,7 @@ import bitshow.service.CarrinhoService;
 
 @RestController
 @RequestMapping("/api/carrinho")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:5500"}, maxAge = 3600)
 public class CarrinhoController {
 
     @Autowired
