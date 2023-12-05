@@ -30,7 +30,7 @@ public class CategoriaController {
         return categoriaService.criarCategoria(categoria);
     }
     
-    @GetMapping("/listar")
+    @GetMapping()
     public List<Categoria> listarCategorias() {
         return categoriaService.listarCategorias();
     }
