@@ -1,5 +1,6 @@
 package bitshow.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.LoggerFactory;
@@ -61,6 +62,11 @@ public class CategoriaService {
 		} else {
 			throw new CategoriaNotFoundException("Categoria não encontrada com o ID: " + id);
 		}
+	}
+
+	public List<Categoria> listarCategorias() {
+		return categoriaRepository.findAll();
+
 	}
 
 }

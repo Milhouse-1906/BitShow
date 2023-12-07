@@ -1,3 +1,4 @@
+use dbbitshow;
 INSERT INTO categoria (nome) VALUES 
     ('Smartphones'),
     ('Laptops'),

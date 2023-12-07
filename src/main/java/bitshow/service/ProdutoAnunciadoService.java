@@ -1,6 +1,7 @@
 package bitshow.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class ProdutoAnunciadoService {
 			throw new IllegalArgumentException("A descrição do produto não pode ser nula ou vazia");
 		}
 
+
 		if (produtoAnunciado.getPreco() == null) {
 			throw new IllegalArgumentException("O preço do produto não pode ser nulo");
 		}
@@ -36,6 +38,10 @@ public class ProdutoAnunciadoService {
 		calendar.setTime(produtoAnunciado.getDataAnuncio());
 		calendar.add(Calendar.DAY_OF_MONTH, 15);
 		produtoAnunciado.setEncerramentoAnuncio(calendar.getTime());
+
+        if (produtoAnunciado.getPreco() == null) {
+            throw new IllegalArgumentException("O preço do produto não pode ser nulo");
+        }
 
 		return produtoAnunciadoRepository.save(produtoAnunciado);
 	}

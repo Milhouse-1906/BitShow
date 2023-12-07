@@ -43,7 +43,7 @@ public class CarrinhoService {
  }
 		
 
-	public Carrinho atualizarCarrinho(Long id, Carrinho carrinhoDTO) throws CarrinhoNotFoundException {
+	public Carrinho atualizarCarrinho(Long id, Carrinho carrinho) throws CarrinhoNotFoundException {
 	       Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(id);
 
 	       if (carrinhoOptional.isPresent()) {

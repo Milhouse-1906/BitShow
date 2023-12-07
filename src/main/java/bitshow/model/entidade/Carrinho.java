@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "CARRINHO")
+@Table(name = "carrinho")
 public class Carrinho {
 
 	public Carrinho(Long id, Produto_Anunciado produtoAnunciado, Usuario usuario) {

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PRODUTO_ANUNCIADO")
+@Table(name = "produto_anunciado")
 public class Produto_Anunciado {
 
 	public Produto_Anunciado(Long id, String nome, String descricao, BigDecimal preco, Date dataAnuncio,
@@ -43,11 +43,11 @@ public class Produto_Anunciado {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date dataVenda;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
