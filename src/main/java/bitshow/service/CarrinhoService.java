@@ -1,5 +1,6 @@
 package bitshow.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import bitshow.exception.CarrinhoNotFoundException;
 import bitshow.model.entidade.Carrinho;
+import bitshow.model.entidade.Usuario;
 import bitshow.model.repository.CarrinhoRepository;
 
 
@@ -54,5 +56,15 @@ public class CarrinhoService {
           throw new CarrinhoNotFoundException("Carrinho não encontrado com o ID: " + id);
 	        }
 	}
+
+	public List<Carrinho> getCarrinhoByUserId(Long id) throws CarrinhoNotFoundException {
+        List<Carrinho> carrinho = carrinhoRepository.findByUserId(id);
+
+        if (carrinho == null) {
+            throw new CarrinhoNotFoundException("Carrinho não existe: " + id );
+        }
+
+        return carrinho;
+    }
     	
  }

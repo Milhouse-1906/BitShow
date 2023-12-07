@@ -35,6 +35,7 @@ public class ProdutoAnunciadoService {
 			throw new IllegalArgumentException("O preço do produto não pode ser nulo");
 		}
 		Calendar calendar = Calendar.getInstance();
+		produtoAnunciado.setDataAnuncio(new Date());
 		calendar.setTime(produtoAnunciado.getDataAnuncio());
 		calendar.add(Calendar.DAY_OF_MONTH, 15);
 		produtoAnunciado.setEncerramentoAnuncio(calendar.getTime());

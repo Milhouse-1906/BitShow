@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS produto_anunciado (
 -- Criação da tabela carrinho
 CREATE TABLE IF NOT EXISTS carrinho (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    id_produto INT,
     id_usuario INT,
     id_produto_anunciado INT,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,

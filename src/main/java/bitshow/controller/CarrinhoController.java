@@ -1,9 +1,22 @@
 package bitshow.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import bitshow.exception.CarrinhoNotFoundException;
 import bitshow.model.entidade.Carrinho;
+import bitshow.model.entidade.Usuario;
 import bitshow.service.CarrinhoService;
 
 @RestController
@@ -17,6 +30,10 @@ public class CarrinhoController {
     @PostMapping
     public Carrinho adicionarAoCarrinho(@RequestBody Carrinho carrinho) {
         return Carrinho.adicionarAoCarrinho(carrinho);
+    }
+    @GetMapping("/usuario/{id}")
+    public List<Carrinho> getCarrinhoByUserId(@PathVariable Long id) throws CarrinhoNotFoundException {
+        return carrinhoService.getCarrinhoByUserId(id);
     }
 
     @GetMapping("/{id}")
