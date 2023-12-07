@@ -1,37 +1,59 @@
 package bitshow.model.specification;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
 
 import bitshow.model.entidade.Produto_Anunciado;
+import bitshow.model.seletor.ProdutoSeletor;
+import jakarta.persistence.criteria.Predicate;
 
 public class ProdutoAnunciadoSpecifications {
 
-    public static Specification<Produto_Anunciado> porCategoria(Long idCategoria) {
-        return (root, query, builder) ->
-                builder.equal(root.get("categoria").get("id"), idCategoria);
-    }
+	public static Specification<Produto_Anunciado> comFiltros(ProdutoSeletor seletor) {
+		return (root, query, cb) -> {
+			List<Predicate> predicates = new ArrayList<>();
 
-    public static Specification<Produto_Anunciado> porUsuario(Long idUsuario) {
-        return (root, query, builder) ->
-                builder.equal(root.get("usuario").get("id"), idUsuario);
-    }
+			if (seletor.getNome() != null && !seletor.getNome().isEmpty()) {
+				predicates.add(cb.like(cb.lower(root.get("nome")), "%" + seletor.getNome().toLowerCase() + "%"));
+			}
+			if (seletor.getCategoria() != null && !seletor.getCategoria().isEmpty()) {
+				predicates.add(cb.like(cb.lower(root.join("categoria").get("nome")),
+						"%" + seletor.getCategoria().toLowerCase() + "%"));
+			}
 
-    public static Specification<Produto_Anunciado> produtoNaoNulo() {
-        return (root, query, builder) ->
-                builder.isNotNull(root.get("produtoAnunciado"));
-    }
+			if (seletor.getValorMinimo() != null && seletor.getValorMaximo() != null) {
+				// SQL: .... AND VALOR BETWEEN (VL_Min) AND (VL_Max)
+				Predicate predicadoNovo = cb.between(root.get("preco"), seletor.getValorMinimo(),
+						seletor.getValorMaximo());
+				predicates.add(predicadoNovo);
 
-    public static Specification<Produto_Anunciado> descricaoNaoVazia() {
-        return (root, query, builder) ->
-                builder.isNotEmpty(root.get("descricao"));
-    }
+			}
 
-    public static Specification<Produto_Anunciado> dataAnuncioValida() {
-        return (root, query, builder) ->
-                builder.greaterThanOrEqualTo(root.get("dataAnuncio"), LocalDate.now());
-    }
+			return cb.and(predicates.toArray(new Predicate[0]));
+		};
+	}
 
-    
+	public static Specification<Produto_Anunciado> porCategoria(Long idCategoria) {
+		return (root, query, builder) -> builder.equal(root.get("categoria").get("id"), idCategoria);
+	}
+
+	public static Specification<Produto_Anunciado> porUsuario(Long idUsuario) {
+		return (root, query, builder) -> builder.equal(root.get("usuario").get("id"), idUsuario);
+	}
+
+	public static Specification<Produto_Anunciado> produtoNaoNulo() {
+		return (root, query, builder) -> builder.isNotNull(root.get("produtoAnunciado"));
+	}
+
+	public static Specification<Produto_Anunciado> descricaoNaoVazia() {
+		return (root, query, builder) -> builder.isNotEmpty(root.get("descricao"));
+	}
+
+	public static Specification<Produto_Anunciado> dataAnuncioValida() {
+		return (root, query, builder) -> builder.greaterThanOrEqualTo(root.get("dataAnuncio"), LocalDate.now());
+	}
+
 }

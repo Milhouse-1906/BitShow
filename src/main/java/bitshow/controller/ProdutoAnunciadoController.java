@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import bitshow.exception.ProdutoAnunciadoNotFoundException;
 import bitshow.model.entidade.Produto_Anunciado;
+import bitshow.model.seletor.ProdutoSeletor;
 import bitshow.service.ProdutoAnunciadoService;
 
 @RestController
@@ -19,6 +20,11 @@ public class ProdutoAnunciadoController {
     public List<Produto_Anunciado> listarProdutos() {
         return produtoAnunciadoService.listarProdutos();
     }
+    
+    @PostMapping("/filtro")
+	public List<Produto_Anunciado> listarComSeletor(@RequestBody ProdutoSeletor seletor){
+		return produtoAnunciadoService.listarComSeletor(seletor);
+	}
 
     @GetMapping("/{id}")
     public Produto_Anunciado obterProdutoPorId(@PathVariable Long id) {
