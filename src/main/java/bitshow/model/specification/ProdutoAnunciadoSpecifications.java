@@ -25,13 +25,20 @@ public class ProdutoAnunciadoSpecifications {
 			}
 
 			if (seletor.getValorMinimo() != null && seletor.getValorMaximo() != null) {
-				// SQL: .... AND VALOR BETWEEN (VL_Min) AND (VL_Max)
-				Predicate predicadoNovo = cb.between(root.get("preco"), seletor.getValorMinimo(),
-						seletor.getValorMaximo());
-				predicates.add(predicadoNovo);
+
+				predicates.add(cb.between(root.get("preco"), seletor.getValorMinimo(), seletor.getValorMaximo()));
 
 			}
-
+			else {
+				if (seletor.getValorMinimo() != null) {
+					predicates.add(cb.greaterThanOrEqualTo(root.get("preco"), seletor.getValorMinimo()));
+				}
+				if (seletor.getValorMaximo() != null) {
+					predicates.add(cb.lessThanOrEqualTo(root.get("preco"), seletor.getValorMaximo()));
+				}
+			}
+			
+			
 			return cb.and(predicates.toArray(new Predicate[0]));
 		};
 	}

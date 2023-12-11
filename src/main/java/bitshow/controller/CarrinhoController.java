@@ -29,7 +29,7 @@ public class CarrinhoController {
 
     @PostMapping
     public Carrinho adicionarAoCarrinho(@RequestBody Carrinho carrinho) {
-        return Carrinho.adicionarAoCarrinho(carrinho);
+        return carrinhoService.adicionarAoCarrinho(carrinho);
     }
     @GetMapping("/usuario/{id}")
     public List<Carrinho> getCarrinhoByUserId(@PathVariable Long id) throws CarrinhoNotFoundException {

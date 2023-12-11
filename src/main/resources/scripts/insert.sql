@@ -1,4 +1,8 @@
 use dbbitshow;
+
+select * from carrinho;
+select * from produto_anunciado;
+
 INSERT INTO categoria (nome) VALUES 
     ('Smartphones'),
     ('Laptops'),

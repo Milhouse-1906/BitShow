@@ -24,6 +24,9 @@ public class Produto_Anunciado {
 		this.categoria = categoria;
 	}
 
+	public Produto_Anunciado() {
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -51,8 +54,6 @@ public class Produto_Anunciado {
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 
-	public Produto_Anunciado() {
-	}
 
 	public Long getId() {
 		return id;
