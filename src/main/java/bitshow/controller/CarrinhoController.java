@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bitshow.exception.CarrinhoNotFoundException;
 import bitshow.model.entidade.Carrinho;
-import bitshow.model.entidade.Usuario;
 import bitshow.service.CarrinhoService;
 
 @RestController

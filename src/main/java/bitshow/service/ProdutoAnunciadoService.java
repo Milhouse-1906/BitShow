@@ -30,7 +30,6 @@ public class ProdutoAnunciadoService {
 			throw new IllegalArgumentException("A descrição do produto não pode ser nula ou vazia");
 		}
 
-
 		if (produtoAnunciado.getPreco() == null) {
 			throw new IllegalArgumentException("O preço do produto não pode ser nulo");
 		}
@@ -40,9 +39,9 @@ public class ProdutoAnunciadoService {
 		calendar.add(Calendar.DAY_OF_MONTH, 15);
 		produtoAnunciado.setEncerramentoAnuncio(calendar.getTime());
 
-        if (produtoAnunciado.getPreco() == null) {
-            throw new IllegalArgumentException("O preço do produto não pode ser nulo");
-        }
+		if (produtoAnunciado.getPreco() == null) {
+			throw new IllegalArgumentException("O preço do produto não pode ser nulo");
+		}
 
 		return produtoAnunciadoRepository.save(produtoAnunciado);
 	}
@@ -108,5 +107,9 @@ public class ProdutoAnunciadoService {
 	public List<Produto_Anunciado> listarComSeletor(ProdutoSeletor seletor) {
 		Specification<Produto_Anunciado> specification = ProdutoAnunciadoSpecifications.comFiltros(seletor);
 		return produtoAnunciadoRepository.findAll(specification);
+	}
+
+	public List<Produto_Anunciado> buscarPorUsuarioId(Long idUsuario) {
+		return produtoAnunciadoRepository.findByUsuarioId(idUsuario);
 	}
 }

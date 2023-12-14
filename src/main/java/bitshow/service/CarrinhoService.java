@@ -31,8 +31,8 @@ public class CarrinhoService {
         return carrinhoRepository.save(carrinho);
     }
 
-    public Carrinho getCarrinhoById(Long id) {
-        return carrinhoRepository.findById(id).orElse(null);
+    public List<Carrinho> getCarrinhoById(Long id) {
+        return (List<Carrinho>) carrinhoRepository.findById(id).orElse(null);
         
     }
 
