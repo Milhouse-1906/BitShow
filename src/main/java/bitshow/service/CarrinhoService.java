@@ -22,7 +22,10 @@ public class CarrinhoService {
     private ProdutoAnunciadoService produtoAnunciadoService;
 
     public Carrinho adicionarAoCarrinho(Carrinho carrinho) {
-        if (produtoAnunciadoService.getProdutoAnunciadoById(carrinho.getProdutoAnunciado().getId()) == null) {
+    	if (produtoAnunciadoService.getProdutoAnunciadoById(carrinho.getProdutoAnunciado().getId()) == null) {
+            throw new IllegalArgumentException("O produto associado não existe");
+        }
+    	if (produtoAnunciadoService.getProdutoAnunciadoById(carrinho.getUsuario().getId()) == null) {
             throw new IllegalArgumentException("O produto associado não existe");
         }
         return carrinhoRepository.save(carrinho);
